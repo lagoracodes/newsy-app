@@ -17,8 +17,6 @@ export async function login(email, password) {
     });
     localStorage.setItem("token", data.accessToken);
     localStorage.setItem("user", JSON.stringify(data));
-
-    alert("Login successful!");
     return data;
   } catch (error) {
     alert("Login failed. Please try again.");

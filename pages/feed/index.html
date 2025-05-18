@@ -79,10 +79,7 @@
               <h2 id="articleTitle" class="text-xl font-bold"></h2>
               <div class="flex flex-col space-y-2">
                 <div class="flex items-center space-x-2 text-sm text-gray-500">
-                  <span id="articleAuthor">Jane Doe</span>
-                  <span id="articleUsername" class="text-gray-400"
-                    >@janedoe</span
-                  >
+                  <span id="articleUsername" class="text-gray-400"></span>
                 </div>
                 <button
                   id="followButton"
@@ -131,6 +128,7 @@
         <div
           onclick="toggleSidebar()"
           class="flex flex-col space-y-1 cursor-pointer p-2"
+          data-hamburger
         >
           <div class="w-6 h-1 bg-gray-600"></div>
           <div class="w-6 h-1 bg-gray-600"></div>
@@ -152,7 +150,7 @@
               <a href="../profile/index.html" class="block hover:text-blue-500"
                 >Profile</a
               >
-              <a href="../../index.html" class="block hover:text-blue-500"
+              <a href="#" onclick="logout()" class="block hover:text-blue-500"
                 >Logout</a
               >
             </nav>
@@ -190,7 +188,7 @@
           <input
             type="search"
             id="searchInput"
-            placeholder="Search news..."
+            placeholder="Search tech news..."
             class="w-full px-4 py-2 rounded-lg border border-gray-300 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-colors"
             oninput="searchBar()"
           />
@@ -256,7 +254,6 @@
               class="flex justify-between items-center text-sm text-gray-500"
             >
               <div class="flex items-center space-x-2">
-                <span>Alex Chen</span>
                 <span class="text-gray-400">@alechentech</span>
                 <span>•</span>
                 <span>2 hours ago</span>
@@ -282,7 +279,6 @@
               class="flex justify-between items-center text-sm text-gray-500"
             >
               <div class="flex items-center space-x-2">
-                <span>Sarah Miller</span>
                 <span class="text-gray-400">@sarahwrites</span>
                 <span>•</span>
                 <span>5 hours ago</span>
@@ -308,7 +304,6 @@
               class="flex justify-between items-center text-sm text-gray-500"
             >
               <div class="flex items-center space-x-2">
-                <span>David Kim</span>
                 <span class="text-gray-400">@davidkim</span>
                 <span>•</span>
                 <span>8 hours ago</span>
@@ -332,7 +327,6 @@
               class="flex justify-between items-center text-sm text-gray-500"
             >
               <div class="flex items-center space-x-2">
-                <span>Jane Doe</span>
                 <span class="text-gray-400">@janedoe</span>
                 <span>•</span>
                 <span>1 day ago</span>
@@ -358,7 +352,6 @@
               class="flex justify-between items-center text-sm text-gray-500"
             >
               <div class="flex items-center space-x-2">
-                <span>Jane Doe</span>
                 <span class="text-gray-400">@janedoe</span>
                 <span>•</span>
                 <span>2 days ago</span>
@@ -382,7 +375,6 @@
               class="flex justify-between items-center text-sm text-gray-500"
             >
               <div class="flex items-center space-x-2">
-                <span>Jane Doe</span>
                 <span class="text-gray-400">@janedoe</span>
                 <span>•</span>
                 <span>3 days ago</span>

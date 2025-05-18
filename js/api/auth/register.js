@@ -1,13 +1,13 @@
 import { apiFetch } from "../fetch.js";
 import { ENDPOINTS } from "../constants.js";
 
-export async function register(name, email, password) {
+export async function register(email, password, username) {
   const data = await apiFetch(ENDPOINTS.auth.register, {
     method: "POST",
     body: JSON.stringify({
-      name,
       email,
       password,
+      name: username,
     }),
   });
 

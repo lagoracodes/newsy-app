@@ -54,12 +54,14 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("registerForm")
     .addEventListener("submit", async function (e) {
       e.preventDefault();
-      const name = document.getElementById("registerName").value;
+      const username = document
+        .getElementById("registerUsername")
+        .value.replace("@", "");
       const email = document.getElementById("registerEmail").value;
       const password = document.getElementById("registerPassword").value;
 
       try {
-        const response = await register(name, email, password);
+        const response = await register(email, password, username);
         if (response) {
           const loginResponse = await login(email, password);
           if (loginResponse) {

@@ -1,35 +1,27 @@
-export function toggleArticleOverlay(
-  title = "",
-  time = "",
-  author = "",
-  username = ""
-) {
-  const overlay = document.getElementById("articleOverlay");
+import { toggleOverlay } from "./overlay-utils.js";
+
+export function toggleArticleOverlay(title = "", time = "", username = "") {
   const titleElement = document.getElementById("articleTitle");
   const timeElement = document.getElementById("articleTime");
-  const authorElement = document.getElementById("articleAuthor");
   const usernameElement = document.getElementById("articleUsername");
   const followButton = document.getElementById("followButton");
-  const body = document.body;
 
-  if (overlay.classList.contains("hidden")) {
-    titleElement.textContent = title;
-    timeElement.textContent = time;
-    authorElement.textContent = author;
-    usernameElement.textContent = username;
+  toggleOverlay("articleOverlay", {
+    showClass: "flex",
+    lockScroll: true,
+    onShow: () => {
+      titleElement.textContent = title;
+      timeElement.textContent = time;
+      usernameElement.textContent = username;
 
-    if (author !== "Jane Doe") {
-      followButton?.classList.remove("hidden");
-    } else {
-      followButton?.classList.add("hidden");
-    }
+      const currentUser = JSON.parse(localStorage.getItem("user"))?.data;
+      const currentUsername = currentUser ? `@${currentUser.name}` : "";
 
-    overlay.classList.remove("hidden");
-    overlay.classList.add("flex");
-    body.style.overflow = "hidden";
-  } else {
-    overlay.classList.remove("flex");
-    overlay.classList.add("hidden");
-    body.style.overflow = "auto";
-  }
+      if (username && username !== currentUsername) {
+        followButton?.classList.remove("hidden");
+      } else {
+        followButton?.classList.add("hidden");
+      }
+    },
+  });
 }
