@@ -15,15 +15,6 @@ export function setupClickOutsideHandlers() {
       sortMenu.classList.add("hidden");
     }
   });
-
-  const articleOverlay = document.getElementById("articleOverlay");
-  if (articleOverlay) {
-    articleOverlay.addEventListener("click", function (e) {
-      if (e.target === this) {
-        toggleArticleOverlay();
-      }
-    });
-  }
 }
 
 export function setupOverlayClickHandler(overlayId, toggleFunction) {
@@ -57,6 +48,14 @@ export function toggleOverlay(overlayId, options = {}) {
     if (onShow) {
       onShow(overlay);
     }
+
+    const clickOutsideHandler = (e) => {
+      if (e.target === overlay) {
+        toggleOverlay(overlayId, options);
+        overlay.removeEventListener("click", clickOutsideHandler);
+      }
+    };
+    overlay.addEventListener("click", clickOutsideHandler);
   } else {
     if (showClass) overlay.classList.remove(showClass);
     overlay.classList.add(hideClass);
@@ -66,4 +65,11 @@ export function toggleOverlay(overlayId, options = {}) {
       onHide(overlay);
     }
   }
+}
+
+export function toggleNewPostOverlay() {
+  toggleOverlay("newPostOverlay", {
+    showClass: "flex",
+    lockScroll: true,
+  });
 }

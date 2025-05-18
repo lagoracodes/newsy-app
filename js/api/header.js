@@ -1,11 +1,11 @@
 import { API_KEY } from "./constants.js";
 
-export function getHeaders(token) {
-  if (token) {
+export function getHeaders(accessToken) {
+  if (accessToken) {
     return {
       "Content-Type": "application/json",
       "X-Noroff-API-Key": API_KEY,
-      Authorization: "Bearer " + token,
+      Authorization: `Bearer ${accessToken}`,
     };
   }
 

@@ -7,20 +7,61 @@ export function toggleSort() {
   });
 }
 
+function getTimestamp(timeString) {
+  const now = new Date();
+
+  if (timeString === "just now") return now.getTime();
+
+  const match = timeString.match(/(\d+)\s+(minute|hour|day)s?\s+ago/);
+  if (!match) return 0;
+
+  const [, amount, unit] = match;
+  const value = parseInt(amount);
+
+  switch (unit) {
+    case "minute":
+      return now.getTime() - value * 60 * 1000;
+    case "hour":
+      return now.getTime() - value * 60 * 60 * 1000;
+    case "day":
+      return now.getTime() - value * 24 * 60 * 60 * 1000;
+    default:
+      return 0;
+  }
+}
+
 const sortFunctions = {
   newest: (a, b) => {
-    const timeA = a.querySelector("span").textContent;
-    const timeB = b.querySelector("span").textContent;
-    return timeA.localeCompare(timeB);
+    try {
+      const timeA = getTimestamp(
+        a.querySelector("span:last-child").textContent.trim()
+      );
+      const timeB = getTimestamp(
+        b.querySelector("span:last-child").textContent.trim()
+      );
+      return timeB - timeA;
+    } catch (error) {
+      console.error("Error sorting by time:", error);
+      return 0;
+    }
   },
   oldest: (a, b) => {
-    const timeA = a.querySelector("span").textContent;
-    const timeB = b.querySelector("span").textContent;
-    return timeB.localeCompare(timeA);
+    try {
+      const timeA = getTimestamp(
+        a.querySelector("span:last-child").textContent.trim()
+      );
+      const timeB = getTimestamp(
+        b.querySelector("span:last-child").textContent.trim()
+      );
+      return timeA - timeB;
+    } catch (error) {
+      console.error("Error sorting by time:", error);
+      return 0;
+    }
   },
   title: (a, b) => {
-    const titleA = a.querySelector("h2").textContent;
-    const titleB = b.querySelector("h2").textContent;
+    const titleA = a.querySelector("h2").textContent.toLowerCase();
+    const titleB = b.querySelector("h2").textContent.toLowerCase();
     return titleA.localeCompare(titleB);
   },
 };
@@ -39,6 +80,7 @@ export function sortBy(criteria) {
       posts.sort(sortFunctions[criteria]);
     }
 
+    container.innerHTML = "";
     posts.forEach((post) => {
       container.appendChild(post);
       post.offsetHeight;

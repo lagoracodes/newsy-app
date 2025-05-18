@@ -15,10 +15,23 @@ export async function login(email, password) {
         password: password,
       }),
     });
-    localStorage.setItem("token", data.accessToken);
-    localStorage.setItem("user", JSON.stringify(data));
+
+    console.log("Login response:", data);
+
+    const accessToken = data.data.accessToken;
+    const userData = data.data;
+
+    if (!accessToken) {
+      throw new Error("No access token received");
+    }
+
+    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("user", JSON.stringify(userData));
+
     return data;
   } catch (error) {
+    console.error("Login error:", error);
     alert("Login failed. Please try again.");
+    throw error;
   }
 }
