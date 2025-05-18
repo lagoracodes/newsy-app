@@ -1,5 +1,5 @@
 import { apiFetch } from "../fetch.js";
-import { LOGIN_URL } from "../constants.js";
+import { ENDPOINTS } from "../constants.js";
 
 export async function login(email, password) {
   if (!email || !password) {
@@ -8,7 +8,7 @@ export async function login(email, password) {
   }
 
   try {
-    const data = await apiFetch(LOGIN_URL, {
+    const data = await apiFetch(ENDPOINTS.auth.login, {
       method: "POST",
       body: JSON.stringify({
         email: email,
