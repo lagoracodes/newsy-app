@@ -3,6 +3,32 @@ import { updateProfilePictureElement } from "./user-utils.js";
 
 let isShowingPost = false;
 
+/**
+ * Shows or hides the article popup window.
+ * If given article info, shows the popup with that content.
+ * If called empty, closes the popup.
+ *
+ * @param {string} [title=""] - The article title
+ * @param {string} [time=""] - When it was posted (like "2 hours ago")
+ * @param {string} [username=""] - Who wrote it (like "@johndoe")
+ * @param {string} [content=""] - The article text
+ * @param {string} [postId=""] - The post's ID number
+ * @param {string} [authorName=""] - The writer's name without @ (like "johndoe")
+ *
+ * @example
+ * // Show an article
+ * toggleArticleOverlay(
+ *   "My First Post",
+ *   "2 hours ago",
+ *   "@johndoe",
+ *   "Hello world!",
+ *   "123",
+ *   "johndoe"
+ * );
+ *
+ * // Close the popup
+ * toggleArticleOverlay();
+ */
 export function toggleArticleOverlay(
   title = "",
   time = "",
